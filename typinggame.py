@@ -1,26 +1,27 @@
 import random
 import time
 
-def toRun(toType):
-    while True:
-        var = input(toType.__str__() + n)
-        if var != toType:
-            return 0
-        else:
-            return 1
 
-def timeForThing():
+def get_words():
+    return [word[1].strip("\r\n ") for word in enumerate(open("words_alpha.txt"))]
+
+def main():
     numCorrect = 0
+    words = get_words()
+
+    finish = time.time() + 180
     start = time.time()
-    while toRun(list[random.randint(0, list.__len__()-1)]) != 0:
-        numCorrect += 1
+
+    while finish - time.time() > 0:
+        word = random.choice(words)
+        if input(f"{word}:\t").strip("\r\n ") == word:
+            numCorrect += 1
+
     end = time.time()
-    return end-start, numCorrect
 
-list = []
-for i in range(ord('a'), ord('z')+1):
-    list.append(chr(i))
+    print(f"You type at {numCorrect / 3} words per minute!")
+    print(f"You completed {numCorrect} words correctly.")
 
-timeTaken, numCompleted = timeForThing()
 
-print(You type at {} words per minute!.format(numCompleted/(timeTaken/60)))
+if __name__ == '__main__':
+    main()
